@@ -1,8 +1,8 @@
-class ApiDoc::DocumentsController < ApplicationController
-  layout false
+class ApiDoc::DocumentsController < ApiDoc::ApplicationController
+  # layout "api_doc/application"
 
   def index
-    render text: "Yeah!"
+    # render text: "Yeah!"
   end
 
   def show
