@@ -1,4 +1,4 @@
 module ApiDoc
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController#ActionController::Base
   end
 end

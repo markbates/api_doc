@@ -4,7 +4,8 @@ module ApiDoc
     def sidebar_links
       groups = {}
       # links = ""
-      Dir.glob(File.join(ApiDoc::Config.view_path, "**", "*.html.erb")) do |file|
+      files = Dir.glob(File.join(ApiDoc::Config.view_path, "**", "*.html.erb")).sort
+      files.each do |file|
         name = file.gsub(ApiDoc::Config.view_path, "")
         name.gsub!(".html.erb", "")
         name.gsub!(/^\//, "")

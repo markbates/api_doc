@@ -23,6 +23,7 @@
             <span class="icon-bar"></span>
           </a>
           <%= link_to(ApiDoc::Config.doc_title, api_doc_home_path, class: "brand") %>
+          <%= render partial: "api_doc/shared/nav_bar" %>
         </div>
       </div>
     </div>
@@ -59,9 +60,7 @@
 
       <hr>
 
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
+      <%= render partial: "api_doc/shared/footer" %>
 
     </div><!--/.fluid-container-->
 
