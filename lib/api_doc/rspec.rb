@@ -3,16 +3,12 @@ RSpec.configure do |c|
   c.after(:each, :api_doc) do |example|
     api_doc = example.example.metadata[:api_doc]
     if api_doc.present?
-      puts ":api_doc"
-      puts api_doc.inspect
       ApiDoc.document(example)
     end
   end
   c.after(:each, "api_doc") do |example|
     api_doc = example.example.metadata["api_doc"]
     if api_doc.present?
-      puts "'api_doc'"
-      puts api_doc.inspect
       ApiDoc.document(example, (api_doc || {}).dup)
     end
   end
