@@ -14,7 +14,8 @@ module ApiDoc
       # puts "@request.env['action_dispatch.request.path_parameters']: #{@request.env['action_dispatch.request.path_parameters'].inspect}"
       
       @response = @env.response
-      @params = @request.headers['action_dispatch.request.path_parameters']
+      @params = @request.env['action_dispatch.request.parameters']
+      @path_parameters = @request.env['action_dispatch.request.path_parameters']
       # puts File.join(@params["controller"], @params["action"])
       options.reverse_merge!(path: File.join(@params["controller"], @params["action"]))
       @options = options
@@ -37,6 +38,10 @@ module ApiDoc
       end
     end
 
+    def request_params
+      @params.except(*@path_parameters.keys, "format").to_query
+    end
+
     def response_json
       body = @response.body.strip
       if body.present?
@@ -44,6 +49,10 @@ module ApiDoc
       else
         return "// No response body returned."
       end
+    end
+
+    def response_headers
+      @response.headers.map {|k, v| "'#{k}': '#{v.to_json}'"}.join("\n")
     end
 
     def generate!

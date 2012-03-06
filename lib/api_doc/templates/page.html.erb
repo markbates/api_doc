@@ -37,6 +37,12 @@
 
 <h2><%= @request.method %> <%= @request.path_info %></h2>
 <h3>Status: <%= @response.status %></h3>
+<% unless request_params.blank? %>
+<h3>Parameters</h3>
+<pre class="prettyprint">
+?<%= request_params %>
+</pre>
+<% end %>
 <h3>Body</h3>
 <pre class="prettyprint">
 <%= request_json %>
@@ -49,7 +55,7 @@
 <% if @response.headers.present? %>
 <h3>Headers:</h3>
 <pre class="prettyprint">
-<%= @response.headers %>
+<%= response_headers %>
 </pre>
 <% end %>
 
