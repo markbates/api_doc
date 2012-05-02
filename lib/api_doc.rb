@@ -3,7 +3,6 @@ require "api_doc/config"
 require "api_doc/engine"
 require "api_doc/document"
 
-require "bootstrap-rails"
 require "jquery-rails"
 
 module ApiDoc
