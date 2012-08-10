@@ -4,7 +4,7 @@
 <div class='well' style="margin-top: 10px;"><%%= t 'api_doc.page.header.<%= @options[:slug] %>', default: '' %></div>
 <%% end %>
 
-<%% if t('api_doc.roles.<%= @options[:slug] %>.<%= @request.method.downcase %>', default: '').present? %>
+<%% if t('api_doc.roles.<%= @options[:slug] %>.<%= @request.method.downcase %>', default: 'Anyone can performed this action.').present? %>
 <div class='' style="margin-top: 10px;">Roles Required: <%%= t('api_doc.roles.<%= @options[:slug] %>.<%= @request.method.downcase %>', default: 'All') %></div>
 <%% end %>
 
