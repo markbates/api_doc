@@ -1,5 +1,13 @@
 <h1><%= @options[:path] %></h1>
 
+<%% if t('api_doc.page.header.<%= @options[:slug] %>', default: '').present? %>
+<div class='well' style="margin-top: 10px;"><%%= t 'api_doc.page.header.<%= @options[:slug] %>', default: '' %></div>
+<%% end %>
+
+<%% if t('api_doc.roles.<%= @options[:slug] %>.<%= @request.method.downcase %>', default: '').present? %>
+<div class='' style="margin-top: 10px;">Roles Required: <%%= t('api_doc.roles.<%= @options[:slug] %>.<%= @request.method.downcase %>', default: 'All') %></div>
+<%% end %>
+
 <% if @options[:meta].present? %>
   <!-- meta: -->
   <div class="page-header">
@@ -32,7 +40,7 @@
 
 <!-- request: -->
 <div class="page-header">
-  <h1>Sample Request</h1>
+  <h1><%%= t "api_doc.request.header" %></h1>
 </div>
 
 <h2><%= @request.method %> <%= @request.path_info %></h2>
@@ -43,6 +51,12 @@
 ?<%= request_params %>
 </pre>
 <% end %>
+<% if request_headers.present? %>
+<h3>Headers:</h3>
+<pre class="prettyprint">
+<%= request_headers %>
+</pre>
+<% end %>
 <h3>Body</h3>
 <pre class="prettyprint">
 <%= request_json %>
@@ -50,7 +64,7 @@
 
 <!-- response: -->
 <div class="page-header">
-  <h1>Sample Response</h1>
+  <h1><%%= t "api_doc.response.header" %></h1>
 </div>
 <% if @response.headers.present? %>
 <h3>Headers:</h3>

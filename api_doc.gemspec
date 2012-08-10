@@ -4,8 +4,8 @@ require File.expand_path('../lib/api_doc/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Mark Bates"]
   gem.email         = ["mark@markbates.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Automatically generates API documentation from RSpec tests}
+  gem.summary       = %q{Automatically generates API documentation from RSpec tests}
   gem.homepage      = ""
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

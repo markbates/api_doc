@@ -1,0 +1,9 @@
+en:
+  api_doc:
+    page:
+      header:
+        default: ""
+    request: 
+      header: "Sample Request"
+    response:
+      header: "Sample Response"

@@ -2,9 +2,11 @@ module ApiDoc
   class Document
 
     def initialize(env, options = {})
+      puts "options: #{options.inspect}"
       @env = env
       # puts "@env: #{@env.inspect}"
       @request = @env.request
+      # puts "@request.headers: #{@request.headers.inspect}"
       # @request.env.each do |key, value|
       #   puts key
       # end
@@ -18,6 +20,7 @@ module ApiDoc
       @path_parameters = @request.env['action_dispatch.request.path_parameters']
       # puts File.join(@params["controller"], @params["action"])
       options.reverse_merge!(path: File.join(@params["controller"], @params["action"]))
+      options.reverse_merge!(slug: options[:path].parameterize)
       @options = options
       # puts "@options: #{@options.inspect}"
     end
@@ -52,7 +55,19 @@ module ApiDoc
     end
 
     def response_headers
-      @response.headers.map {|k, v| "'#{k}': '#{v.to_json}'"}.join("\n")
+      @response.headers.map {|k, v| "#{k}: #{v.to_json}"}.join("\n")
+    end
+
+    def request_headers
+      unless @request_headers
+        @request_headers = {}
+        @request.headers.each do |key, value|
+          unless key.match(/^(action_dispatch|rack)/)
+            @request_headers[key] = value
+          end
+        end
+      end
+      return @request_headers.map {|k, v| "'#{k}': #{v.to_json}"}.join("\n")
     end
 
     def generate!
