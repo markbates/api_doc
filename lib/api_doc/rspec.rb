@@ -7,7 +7,7 @@ if ENV["API_DOC"]
     end
     c.after(:each, "api_doc") do |example|
       api_doc = example.example.metadata["api_doc"]
-      puts "api_doc: #{api_doc.inspect}"
+      # puts "api_doc: #{api_doc.inspect}"
       if api_doc.present?
         if api_doc.is_a?(Hash)
           options = api_doc.dup

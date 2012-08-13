@@ -1,0 +1,9 @@
+en:
+  api_doc:
+    page:
+      request: 
+        header: "Sample Request"
+      response:
+        header: "Sample Response"
+      roles: "Anyone can performed this action."
+      authentication: "No"

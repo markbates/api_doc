@@ -2,7 +2,7 @@ module ApiDoc
   class Document
 
     def initialize(env, options = {})
-      puts "options: #{options.inspect}"
+      # puts "options: #{options.inspect}"
       @env = env
       # puts "@env: #{@env.inspect}"
       @request = @env.request
@@ -30,9 +30,10 @@ module ApiDoc
       body = @request.env['rack.input']
       if body.present?
         body.rewind
-        ret = URI.unescape(body.read)
+        # ret = URI.unescape(body.read)
+        ret = body.read
         if ret.present?
-          return ret
+          return JSON.pretty_generate(Rack::Utils.parse_nested_query(CGI.unescape(ret)))
         else
           return "// No request body necessary."
         end
@@ -42,7 +43,7 @@ module ApiDoc
     end
 
     def request_params
-      @params.except(*@path_parameters.keys, "format").to_query
+      CGI.unescape(@params.except(*@path_parameters.keys, "format").to_query)
     end
 
     def response_json

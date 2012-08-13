@@ -31,5 +31,16 @@ module ApiDoc
       raw html
     end
 
+    def tr(slug, *args)
+      path = %w{api_doc page}
+      no_slug_path = path.dup
+      path << slug
+      path << args
+      no_slug_path << args
+      path.flatten!
+      no_slug_path.flatten!
+      t(path.flatten.join("."), default: t(no_slug_path.join('.'), default: ""))
+    end
+
   end
 end

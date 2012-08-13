@@ -1,51 +1,30 @@
 <h1><%= @options[:path] %></h1>
 
-<%% if t('api_doc.page.header.<%= @options[:slug] %>', default: '').present? %>
-<div class='well' style="margin-top: 10px;"><%%= t 'api_doc.page.header.<%= @options[:slug] %>', default: '' %></div>
+<%% unless tr("<%= @options[:slug] %>", :header).blank? %>
+<div class='well' style="margin-top: 10px;"><%%= tr("<%= @options[:slug] %>", :header) %></div>
 <%% end %>
 
-<%% if t('api_doc.roles.<%= @options[:slug] %>.<%= @request.method.downcase %>', default: 'Anyone can performed this action.').present? %>
-<div class='' style="margin-top: 10px;">Roles Required: <%%= t('api_doc.roles.<%= @options[:slug] %>.<%= @request.method.downcase %>', default: 'All') %></div>
+<%% unless tr('<%= @options[:slug] %>', :description).blank? %>
+<div class='description' style="margin-top: 10px;"><%%= tr('<%= @options[:slug] %>', :description) %></div>
 <%% end %>
 
-<% if @options[:meta].present? %>
-  <!-- meta: -->
-  <div class="page-header">
-    <h1>Details</h1>
-  </div>
-  <% if @options[:meta][:header].present? %>
-    <p>
-      <%= @options[:meta][:header] %>
-    </p>
-  <% end %>
-  <% if @options[:meta][:options].present? %>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Key</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @options[:meta][:options].each do |key, value| %>
-          <tr>
-            <td><%= key %></td>
-            <td><%= value %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
-<% end %>
+<div class='well' style="margin-top: 10px;">
+  <strong>Requires Authentication:</strong> <%%= tr('<%= @options[:slug] %>', :authentication) %><br/>
+  <strong>Roles Required:</strong> <%%= tr('<%= @options[:slug] %>', :roles) %>
+</div>
 
 <!-- request: -->
 <div class="page-header">
-  <h1><%%= t "api_doc.request.header" %></h1>
+  <h1><%%= tr('<%= @options[:slug] %>', :request, :header) %></h1>
 </div>
+
+<%% unless tr('<%= @options[:slug] %>', :request, :description).blank? %>
+<div class='request-description' style="margin-top: 10px;"><%%= tr('<%= @options[:slug] %>', :request, :description) %></div>
+<%% end %>
 
 <h2><%= @request.method %> <%= @request.path_info %></h2>
 <h3>Status: <%= @response.status %></h3>
-<% unless request_params.blank? %>
+<% if @request.method == 'GET' && !request_params.blank? %>
 <h3>Parameters</h3>
 <pre class="prettyprint">
 ?<%= request_params %>
@@ -64,8 +43,13 @@
 
 <!-- response: -->
 <div class="page-header">
-  <h1><%%= t "api_doc.response.header" %></h1>
+  <h1><%%= tr('<%= @options[:slug] %>', :response, :header) %></h1>
 </div>
+
+<%% unless tr('<%= @options[:slug] %>', :request, :description).blank? %>
+<div class='response-description' style="margin-top: 10px;"><%%= tr('<%= @options[:slug] %>', :request, :description) %></div>
+<%% end %>
+
 <% if @response.headers.present? %>
 <h3>Headers:</h3>
 <pre class="prettyprint">
