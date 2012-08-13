@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    api_doc (0.0.6)
+    api_doc (0.0.7)
       jquery-rails
       rails (>= 3.2)
 
