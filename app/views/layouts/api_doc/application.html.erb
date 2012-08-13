@@ -24,7 +24,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to(ApiDoc::Config.doc_title, api_doc_home_path, class: "brand") %>
+          <%= link_to("#{t 'api_doc.company_name'} #{ApiDoc::Config.doc_title}", api_doc_home_path, class: "brand") %>
           <%= render partial: "api_doc/shared/nav_bar" %>
         </div>
       </div>

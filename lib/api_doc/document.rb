@@ -78,7 +78,14 @@ module ApiDoc
       dir_path = File.join([ApiDoc::Config.view_path, File.dirname(@options[:path]).split("/")].flatten)
       # puts "dir_path: #{dir_path.inspect}"
       FileUtils.mkdir_p(dir_path)
-      File.open(File.join(dir_path, "#{@request.method}_#{File.basename(@options[:path])}_(#{@response.status}).html.erb"), 'w') do |f|
+      name = [@request.method, File.basename(@options[:path]), @options[:name].try(:gsub, " ", "_"), "(#{@response.status})"]
+      name.compact!
+      name = name.join("_")
+      # File.open(File.join(dir_path, "#{name.join("_").gsub(" ", "_")}.html.erb"), 'w') do |f|
+
+      # name = "#{@request.method}_#{File.basename(@options[:path])}_(#{@response.status})"
+      # puts "name: #{name.inspect}"
+      File.open(File.join(dir_path, "#{name}.html.erb"), 'w') do |f|
         f.write html
       end
     end

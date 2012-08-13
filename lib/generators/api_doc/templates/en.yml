@@ -1,5 +1,6 @@
 en:
   api_doc:
+    company_name: "Your Company Name"
     page:
       request: 
         header: "Sample Request"

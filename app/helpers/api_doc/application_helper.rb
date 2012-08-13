@@ -25,7 +25,7 @@ module ApiDoc
           Rails.logger.info display_name
           display_name.gsub!(/\_\(/, " (")
           Rails.logger.info display_name
-          html << "<li><a href='#{api_doc_page_path(path: name)}'>#{display_name}</a></li>"
+          html << "<li><a href='#{api_doc_page_path(path: name)}'>#{display_name.gsub("_", " ")}</a></li>"
         end
       end
       raw html
