@@ -1,25 +1,25 @@
 <h1><%= @options[:path] %></h1>
 
 <%% unless tr("<%= @options[:slug] %>", :header).blank? %>
-<div class='well' style="margin-top: 10px;"><%%= tr("<%= @options[:slug] %>", :header) %></div>
+<div class='well' style="margin-top: 10px;"><%%= raw tr("<%= @options[:slug] %>", :header) %></div>
 <%% end %>
 
 <%% unless tr('<%= @options[:slug] %>', :description).blank? %>
-<div class='description' style="margin-top: 10px;"><%%= tr('<%= @options[:slug] %>', :description) %></div>
+<div class='description' style="margin-top: 10px;"><%%= raw tr('<%= @options[:slug] %>', :description) %></div>
 <%% end %>
 
 <div class='well' style="margin-top: 10px;">
-  <strong>Requires Authentication:</strong> <%%= tr('<%= @options[:slug] %>', :authentication) %><br/>
-  <strong>Roles Required:</strong> <%%= tr('<%= @options[:slug] %>', :roles) %>
+  <strong>Requires Authentication:</strong> <%%= raw tr('<%= @options[:slug] %>', :authentication) %><br/>
+  <strong>Roles Required:</strong> <%%= raw tr('<%= @options[:slug] %>', :roles) %>
 </div>
 
 <!-- request: -->
 <div class="page-header">
-  <h1><%%= tr('<%= @options[:slug] %>', :request, :header) %></h1>
+  <h1><%%= raw tr('<%= @options[:slug] %>', :request, :header) %></h1>
 </div>
 
 <%% unless tr('<%= @options[:slug] %>', :request, :description).blank? %>
-<div class='request-description' style="margin-top: 10px;"><%%= tr('<%= @options[:slug] %>', :request, :description) %></div>
+<div class='request-description' style="margin-top: 10px;"><%%= raw tr('<%= @options[:slug] %>', :request, :description) %></div>
 <%% end %>
 
 <h2><%= @request.method %> <%= @request.path_info %></h2>
@@ -42,12 +42,12 @@
 
 <!-- response: -->
 <div class="page-header">
-  <h1><%%= tr('<%= @options[:slug] %>', :response, :header) %></h1>
+  <h1><%%= raw tr('<%= @options[:slug] %>', :response, :header) %></h1>
   <h3>Status: <%= @response.status %></h3>
 </div>
 
 <%% unless tr('<%= @options[:slug] %>', :request, :description).blank? %>
-<div class='response-description' style="margin-top: 10px;"><%%= tr('<%= @options[:slug] %>', :request, :description) %></div>
+<div class='response-description' style="margin-top: 10px;"><%%= raw tr('<%= @options[:slug] %>', :request, :description) %></div>
 <%% end %>
 
 <% if @response.headers.present? %>
