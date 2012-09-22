@@ -1,6 +1,6 @@
 # ApiDoc
 
-TODO: Write a gem description
+A quick and easy way to generate pretty API documentation for a Rails application using your (Rspec) controller specs.
 
 ## Installation
 
@@ -18,7 +18,26 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Prepare your Rails project by running the generator inside your project:
+
+    rails g api_doc:install
+
+This will copy over the appropriate assets and mount the engine routes.
+
+Next, add the following to your <code>spec/spec_helper.rb</spec>:
+
+    require "api_doc/rspec"
+
+Then tag each controller spec that you want to document like so:
+
+    describe 'index' do
+      it 'returns a list of questions', :api_doc => true do
+        get :index
+        response.status.should be(200)
+      end
+    end
+
+Finally, run <code>rake api:doc</code> command and visit /api_docs to browse the generated documentation.
 
 ## Contributing
 
