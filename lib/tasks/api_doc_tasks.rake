@@ -4,7 +4,6 @@ namespace :api do
   task :doc => :environment do
     ENV["API_DOC"] = "YES"
     FileUtils.rm_rf(ApiDoc::Config.view_path)
-    Rake::Task['spec:controllers'].invoke
+    Rake::Task['spec:controllers', 'spec:requests'].invoke
   end
-
 end
